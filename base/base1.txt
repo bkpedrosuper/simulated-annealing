@@ -1,0 +1,11 @@
+# texto
+# texto
+# texto
+# texto
+# texto
+
+1 10 20
+2 20 20
+3 5 10
+4 8 10
+5 23 4
