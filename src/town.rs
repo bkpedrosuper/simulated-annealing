@@ -1,14 +1,17 @@
 
+#[derive(Debug, Clone)]
 pub struct Town {
     pub x: i32,
     pub y: i32,
+    pub id: usize,
 }
 
 impl Town {
-    pub fn new(x: i32, y: i32) -> Self {
+    pub fn new(x: i32, y: i32, id: usize) -> Self {
         Self {
             x,
             y,
+            id,
         }
     }
 
