@@ -15,24 +15,29 @@ impl DistanceMatrix {
     }
 
     pub fn create_distance_matrix(towns: &Vec<Town>) ->  DistanceMatrix {
-        let inf: f32 = 10000007.;
         let size = towns.len() as usize;
         let mut matrix: DistanceMatrix = DistanceMatrix::new(size);
-    
-        for town in 0 .. towns.len() {
-            for k in 0 .. towns.len() {
-                if k == 0 || town == 0 {
-                    matrix.content[town][k] = inf;
-                    continue;
-                }
+
+        for town1 in towns {
+            for town2 in towns {
+                let dist = Town::dist(&town1, &town2);
                 
-                let dist = Town::dist(&towns[town], &towns[k]);
-                
-                matrix.content[town][k] = dist;
+                matrix.content[town1.id][town2.id] = dist;
             }
         }
     
         matrix
+    }
+
+    pub fn tsp_checker(&self, towns: &Vec<Town>) -> f32 {
+        
+        let mut dist: f32 = 0.;
+        for i in 0..towns.len() - 1 {
+            assert!(i <= towns.len() - 1);
+            dist += self.content[towns[i].id][towns[i+1].id];
+        }
+
+        dist
     }
 
     

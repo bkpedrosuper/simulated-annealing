@@ -8,7 +8,7 @@ pub fn get_towns_from_database(base: String) ->  Vec<Town> {
 
     let mut results: Vec<Town> = Vec::new();
 
-    let mut id: usize = 1;
+    let mut id: usize = 0;
     
     let content = fs::read_to_string(base_path).expect("Could not read database file");
     for line in content.split("\n") {

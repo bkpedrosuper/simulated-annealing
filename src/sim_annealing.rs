@@ -1,31 +1,48 @@
-use crate::town::Town;
-use crate::init_functions::get_towns_from_database;
-use rand::{thread_rng, seq::SliceRandom, distributions::Uniform, prelude::Distribution};
+use crate::town::{Town, generate_neighbor};
+use crate::matrix::DistanceMatrix;
+use crate::params::Params;
+use rand::{Rng};
+use std::f32::consts::E;
 
-pub fn generate_initial_permutation(base: String) -> Vec<Town> {
-    let mut towns: Vec<Town> = get_towns_from_database(base);
-    println!("Before shuffle \n{:?}", towns);
-    towns.shuffle(&mut thread_rng());
-    println!("After shuffle \n{:?}", towns);
-
-    towns.to_vec()
+fn energy_probability_function(delta: f32, k: f32, t: f32) -> f32{
+    E.powf(-delta / (k * t))
 }
 
-pub fn generate_neighbor(towns: &mut Vec<Town>, n_swaps: usize) -> Vec<Town> {
-    let mut rng = rand::thread_rng();
-    let towns_range = Uniform::from(0..towns.len());
+pub fn tsp_sa_algorithm(mut towns: Vec<Town>, matrix: &DistanceMatrix, params: Params) -> Vec<Town> {
+    let mut temp = params.temp0;
 
-    for _ in 0..n_swaps {
-        let pick1 = towns_range.sample(&mut rng);
-        let pick2 = towns_range.sample(&mut rng);
-        println!("Mudou o {} e o {}", pick1, pick2);
-        towns.swap(pick1, pick2)
+    while temp > params.temp_final {
+
+        for _ in 0..params.max_iter {
+
+            let neighbor = generate_neighbor(&mut towns, params.n_swaps);
+            let delta = matrix.tsp_checker(&neighbor) - matrix.tsp_checker(&towns);
+    
+            if delta < 0. {
+                towns = neighbor;
+            }
+            
+            else {
+                let mut rng = rand::thread_rng();
+                let x: f32 = rng.gen();
+                
+
+                if x < energy_probability_function(delta, params.k, temp) {
+                    towns = neighbor;
+                }
+            }
+
+        }
+        
+        // print!("Best: ");
+        // for town in &towns {
+        //     print!("{}", town.id);
+        // }
+        // println!();
+        temp = temp * params.alpha;
+        println!("Temperatura: {}", temp);
+
     }
-    println!("AFTER MOVE \n {:?}", towns);
-    towns.to_vec()
+    
+    towns
 }
-// fn generate_permutation(towns: Vec)
-
-// pub fn sa_algorithm(towns: Vec<Town>) {
-//     println!("FEZ O ALGORITMO CONFIA");
-// }
