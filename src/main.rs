@@ -1,3 +1,4 @@
+use simulated_annealing::io_functions::create_file;
 use simulated_annealing::sim_annealing::{tsp_sa_algorithm};
 use simulated_annealing::town::{Town, generate_initial_permutation};
 use simulated_annealing::matrix::DistanceMatrix;
@@ -15,6 +16,7 @@ fn main() {
     let towns: Vec<Town> = generate_initial_permutation(&params.base);
     let matrix: DistanceMatrix = DistanceMatrix::create_distance_matrix(&towns);
 
+    create_file(&params.base).expect("Could not create file");
 
     let results = tsp_sa_algorithm(towns, &matrix, params);
 

@@ -1,5 +1,7 @@
 use std::fs;
-
+use std::fs::File;
+use std::io::Write;
+use std::fs::OpenOptions;
 use crate::town::Town;
 // use crate::town::Town;
 
@@ -21,4 +23,24 @@ pub fn get_towns_from_database(base: &String) ->  Vec<Town> {
         id+=1;
     }
     results
+}
+
+pub fn create_file(base: &String) -> std::io::Result<()> {
+    File::create(format!("results/{}", base))?;
+    Ok(())
+}
+
+pub fn write_results(base: &String, temp: f32, dist: f32) -> std::io::Result<()> {
+
+    let path = format!("results/{}", base);
+    let mut file = OpenOptions::new()
+        .append(true)
+        .open(&path)
+        .unwrap();
+    
+    if let Err(e) = writeln!(file, "{}", format!("{temp} {dist}", temp=temp, dist=dist)) {
+        eprintln!("Couldn't write to file: {}", e);
+    }
+    
+    Ok(())
 }

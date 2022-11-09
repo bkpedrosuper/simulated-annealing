@@ -1,3 +1,4 @@
+use crate::io_functions::write_results;
 use crate::town::{Town, generate_neighbor};
 use crate::matrix::DistanceMatrix;
 use crate::params::Params;
@@ -53,7 +54,7 @@ pub fn tsp_sa_algorithm(mut towns: Vec<Town>, matrix: &DistanceMatrix, params: P
         // temp = temp * params.alpha;
         temp = cooling_schedule(&params.temp0, &params.temp_final, &iterations,  &params.max_iter);
         
-        
+        write_results(&params.base, temp, matrix.tsp_checker(&towns)).expect("Could not write in file");
         
         println!("Temperatura: {}", temp);
         println!("Distância: {}", matrix.tsp_checker(&towns));
