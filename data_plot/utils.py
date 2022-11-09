@@ -11,9 +11,9 @@ def load(fp: str):
             temp = raw[0]
             dist = raw[1]
 
-            iters.append(iter)
-            temps.append(temp)
-            dists.append(dist)
+            iters.append(int(iter))
+            temps.append(float(temp))
+            dists.append(float(dist))
 
             iter += 1
     
