@@ -1,4 +1,4 @@
-use crate::init_functions::get_towns_from_database;
+use crate::io_functions::get_towns_from_database;
 use rand::{thread_rng, seq::SliceRandom, distributions::Uniform, prelude::Distribution};
 
 #[derive(Debug, Clone)]

@@ -53,6 +53,8 @@ pub fn tsp_sa_algorithm(mut towns: Vec<Town>, matrix: &DistanceMatrix, params: P
         // temp = temp * params.alpha;
         temp = cooling_schedule(&params.temp0, &params.temp_final, &iterations,  &params.max_iter);
         
+        
+        
         println!("Temperatura: {}", temp);
         println!("Distância: {}", matrix.tsp_checker(&towns));
     }
