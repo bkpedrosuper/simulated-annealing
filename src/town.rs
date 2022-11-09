@@ -23,22 +23,22 @@ impl Town {
     }
 }
 
-pub fn generate_initial_permutation(base: String) -> Vec<Town> {
+pub fn generate_initial_permutation(base: &String) -> Vec<Town> {
     let mut towns: Vec<Town> = get_towns_from_database(base);
     towns.shuffle(&mut thread_rng());
 
     towns.to_vec()
 }
 
-pub fn generate_neighbor(towns: &mut Vec<Town>, n_swaps: usize) -> Vec<Town> {
+pub fn generate_neighbor(towns: &Vec<Town>, n_swaps: usize) -> Vec<Town> {
     let mut rng = rand::thread_rng();
     let towns_range = Uniform::from(0..towns.len());
+    let mut neighbor = towns.to_vec();
 
     for _ in 0..n_swaps {
         let pick1 = towns_range.sample(&mut rng);
         let pick2 = towns_range.sample(&mut rng);
-        println!("Mudou o {} e o {}", pick1, pick2);
-        towns.swap(pick1, pick2)
+        neighbor.swap(pick1, pick2)
     }
-    towns.to_vec()
+    neighbor.to_vec()
 }

@@ -6,6 +6,7 @@ pub struct Params {
     pub n_swaps: usize,
     pub temp_final: f32,
     pub k: f32,
+    pub base: String,
 }
 
 impl Params {
@@ -16,6 +17,7 @@ impl Params {
         n_swaps: usize,
         temp_final: f32,
         k: f32,
+        base: String,
     ) -> Self {
 
         Self {
@@ -25,11 +27,12 @@ impl Params {
             n_swaps,
             temp_final,
             k,
+            base,
         }
     }
 
     pub fn default() -> Self {
         
-        Params { alpha: (0.98), max_iter: (100000), temp0: (1.), n_swaps: (1), temp_final: (0.9), k: (1.)}
+        Params { alpha: (0.98), max_iter: (100000), temp0: (1.), n_swaps: (1), temp_final: (0.9), k: (1.), base: ("base51.txt".to_string())}
     }
 }

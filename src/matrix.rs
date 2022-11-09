@@ -30,7 +30,6 @@ impl DistanceMatrix {
     }
 
     pub fn tsp_checker(&self, towns: &Vec<Town>) -> f32 {
-        
         let mut dist: f32 = 0.;
         for i in 0..towns.len() - 1 {
             assert!(i <= towns.len() - 1);

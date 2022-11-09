@@ -3,7 +3,7 @@ use std::fs;
 use crate::town::Town;
 // use crate::town::Town;
 
-pub fn get_towns_from_database(base: String) ->  Vec<Town> {
+pub fn get_towns_from_database(base: &String) ->  Vec<Town> {
     let base_path: String = format!("base/{base_path}", base_path=base);
 
     let mut results: Vec<Town> = Vec::new();
