@@ -1,5 +1,12 @@
+def load_runs(fp: str):
+    runs = []
+    with open(fp, 'r') as file:
+        for line in file.readlines():
+            runs.append(float(line))
 
-def load(fp: str):
+        return runs
+
+def load_convergence(fp: str):
 
     iters = []
     temps = []

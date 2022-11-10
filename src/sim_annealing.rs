@@ -14,7 +14,7 @@ fn cooling_schedule(t0: &f32, tn: &f32, iter: &usize, n: &usize) -> f32 {
     t0 * ((tn/t0).powf(exp))
 }
 
-pub fn tsp_sa_algorithm(mut towns: Vec<Town>, matrix: &DistanceMatrix, params: Params) -> Vec<Town> {
+pub fn tsp_sa_algorithm(mut towns: Vec<Town>, matrix: &DistanceMatrix, params: &Params) -> Vec<Town> {
     let mut temp = params.temp0;
     let mut best_towns: Vec<Town> = towns.to_vec();
     let mut best_distance: f32 = matrix.tsp_checker(&towns);
@@ -56,8 +56,8 @@ pub fn tsp_sa_algorithm(mut towns: Vec<Town>, matrix: &DistanceMatrix, params: P
         
         write_results(&params.base, temp, matrix.tsp_checker(&towns)).expect("Could not write in file");
         
-        println!("Temperatura: {}", temp);
-        println!("Distância: {}", matrix.tsp_checker(&towns));
+        // println!("Temperatura: {}", temp);
+        // println!("Distância: {}", matrix.tsp_checker(&towns));
     }
     
     best_towns

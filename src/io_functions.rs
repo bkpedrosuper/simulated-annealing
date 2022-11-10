@@ -44,3 +44,10 @@ pub fn write_results(base: &String, temp: f32, dist: f32) -> std::io::Result<()>
     
     Ok(())
 }
+
+pub fn delete_file(base: &String) -> std::io::Result<()> {
+    let path = format!("results/{}", base);
+    fs::remove_file(path).expect("Could not remove file");
+    
+    Ok(())
+}

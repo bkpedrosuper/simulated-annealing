@@ -1,14 +1,25 @@
 from math import sqrt
 from matplotlib import pyplot as plt
-from utils import load
+from utils import load_convergence, load_runs
 import pandas as pd
 import seaborn as sns
-import numpy as np
 
-iters, temps, dists = load("../simulated-annealing/results/base51.txt")
-d = {"temp": temps, "dists": dists, "iteraction": iters}
+base = "base51"
+
+iters, temps, dists = load_convergence(f'../simulated-annealing/results/{base}.txt')
+d = {"temp": temps, "Activation Function": dists, "Iteractions": iters}
 df = pd.DataFrame(data=d)
 
-sns.lineplot(data=df, x="iteraction", y="dists")
+sns.lineplot(data=df, x="Iteractions", y="Activation Function")
+
+plt.show()
+
+plt.clf()
+
+runs = load_runs(f'../simulated-annealing/results/{base}_runs')
+
+ax = sns.boxplot(x=runs)
+
+ax.set(xlabel="Final Result")
 
 plt.show()
