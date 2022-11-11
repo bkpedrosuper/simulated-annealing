@@ -48,16 +48,19 @@ pub fn tsp_sa_algorithm(mut towns: Vec<Town>, matrix: &DistanceMatrix, params: &
                 }
             }
 
+            let distt = matrix.tsp_checker(&towns);
+
+            write_results(&params.base, temp, distt).expect("Could not write in file");
             
         }
         
         // temp = temp * params.alpha;
         temp = cooling_schedule(&params.temp0, &params.temp_final, &iterations,  &params.max_iter);
         
-        write_results(&params.base, temp, matrix.tsp_checker(&towns)).expect("Could not write in file");
+        // write_results(&params.base, temp, matrix.tsp_checker(&towns)).expect("Could not write in file");
         
         // println!("Temperatura: {}", temp);
-        // println!("Distância: {}", matrix.tsp_checker(&towns));
+        // println!("Distância: {}", best_distance);
     }
     
     best_towns

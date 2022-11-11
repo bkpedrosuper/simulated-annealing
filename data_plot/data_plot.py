@@ -7,6 +7,7 @@ import seaborn as sns
 base = "base51"
 
 iters, temps, dists = load_convergence(f'../simulated-annealing/results/{base}.txt')
+
 d = {"temp": temps, "Activation Function": dists, "Iteractions": iters}
 df = pd.DataFrame(data=d)
 
