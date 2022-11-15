@@ -4,7 +4,7 @@ from utils import load_convergence, load_runs
 import pandas as pd
 import seaborn as sns
 
-base = "base51"
+base = "base100"
 
 iters, temps, dists = load_convergence(f'../simulated-annealing/results/{base}.txt')
 
@@ -18,6 +18,11 @@ plt.show()
 plt.clf()
 
 runs = load_runs(f'../simulated-annealing/results/{base}_runs')
+
+d_runs = {"runs": runs}
+df_runs = pd.DataFrame(data = d_runs)
+
+print(df_runs.describe())
 
 ax = sns.boxplot(x=runs)
 

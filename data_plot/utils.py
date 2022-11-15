@@ -6,7 +6,7 @@ def load_runs(fp: str):
 
         return runs
 
-def load_convergence(fp: str):
+def load_convergence(fp: str, max_itens: int = 100006):
 
     iters = []
     temps = []
@@ -24,4 +24,4 @@ def load_convergence(fp: str):
 
             iter += 1
     
-    return iters, temps, dists
+    return iters[:max_itens], temps[:max_itens], dists[:max_itens]
