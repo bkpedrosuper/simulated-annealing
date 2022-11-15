@@ -1,3 +1,4 @@
 /target
 /sa-venv
 /venv
+/results/*
