@@ -5,13 +5,13 @@ use simulated_annealing::matrix::DistanceMatrix;
 use simulated_annealing::params::Params;
 fn main() {
 
-    let total_runs = 10;
+    let total_runs = 1;
     // Algoritmo
     let params = Params { alpha: (0.98),
         max_iter: (10e2 as usize),
-        temp0: (10.),
+        temp0: (800.),
         n_swaps: (1),
-        temp_final: (0.01),
+        temp_final: (10e-5),
         k: (1.),
         base: "base100.txt".to_string()
     };
